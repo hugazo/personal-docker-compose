@@ -18,7 +18,7 @@ services:
       - /mnt/nas:/media
     command: -u "nas;media" -s "media;/media;yes;no;no;nas;nas;nas"
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce:latest
     container_name: portainer
     command: -H unix:///var/run/docker.sock
     restart: always
@@ -28,19 +28,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/portainer:/data
-  homebridge:
-    image: oznu/homebridge:latest
-    container_name: homebridge
-    restart: always
-    network_mode: host
-    environment:
-      - TZ=America/Santiago
-      - PGID=1000
-      - PUID=1000
-      - HOMEBRIDGE_CONFIG_UI=1
-      - HOMEBRIDGE_CONFIG_UI_PORT=8080
-    volumes:
-      - ~/.homebridge:/homebridge
   transmission:
     image: linuxserver/transmission
     container_name: transmission
