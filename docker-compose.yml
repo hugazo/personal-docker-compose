@@ -28,20 +28,23 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/portainer:/data
+
   transmission:
-    image: linuxserver/transmission
+    image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Santiago
-        #- TRANSMISSION_WEB_HOME=/combustion-release/ #optional
-      - USER=nas #optional
+       - USER=nas #optional
       - PASS=media #optional
+      # - WHITELIST=iplist #optional
+      # - PEERPORT=peerport #optional
+      # - HOST_WHITELIST=dnsname list #optional
     volumes:
       - ~/.config/transmission-daemon:/config
       - /mnt/nas/downloads:/downloads
-        #- path to watch folder:/watch
+      - /path/to/watch/folder:/watch
     ports:
       - 9091:9091
       - 51413:51413
