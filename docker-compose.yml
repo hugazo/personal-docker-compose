@@ -1,5 +1,14 @@
-version: '2.1'
+version: '3'
 services:
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - ~/.config/home-assistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
   samba:
     # Updated due to a documented bug in alpine linux https://gitlab.alpinelinux.org/alpine/aports/-/issues/12346
     container_name: samba
